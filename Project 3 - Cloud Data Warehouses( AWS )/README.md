@@ -165,6 +165,13 @@ Data
 ```
 {'place_id': 497005, 'licence': 'Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright', 'osm_type': 'node', 'osm_id': 158851303, 'lat': '40.0884475', 'lon': '-74.3995939', 'display_name': 'Woodair Estates, Ocean County, New Jersey, USA', 'address': {'hamlet': 'Woodair Estates', 'county': 'Ocean County', 'state': 'New Jersey', 'country': 'USA', 'country_code': 'us'}, 'boundingbox': ['40.0484475', '40.1284475', '-74.4395939', '-74.3595939']}
 ```
+
+5. geopy Timeout issue
+https://gis.stackexchange.com/questions/173569/avoid-time-out-error-nominatim-geopy-open-street-maps
+
+6. Check if a value in a column is null or not
+https://stackoverflow.com/questions/41287171/iterate-through-dataframe-and-select-null-values
+
 --
 df['ts'] = pd.to_datetime(df['ts'], unit='ms')
 
@@ -175,7 +182,7 @@ Quality
 4. song_df: Around 4762 rows have Year has 0
 5. song_df: Format of location is not consistent. London, England/Texas/California - LA
 6. song_df: Around 2926 rows has just the location name doesn't have latitude, longitude
-7. song_df: artist_location has None & Blank
+7. song_df: artist_location has None & Blank & Integer values(iloc[103])
 8. log_df : When auth='Logged Out' it doesn't have userId. But when 'Logged In', userId is captured. Due to this quality issue, you cannot say exactly how long a user id logged in. You can just make a guess by listing the longs.
 
 Tidiness
