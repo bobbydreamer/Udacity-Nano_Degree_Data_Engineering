@@ -1,206 +1,190 @@
-# Cloud Data Warehouses( AWS )
+# Cloud Data Warehouses (AWS)
 
-## Warehousing Concepts & Terminologies
+> ## Udacity Data Engineer Nano Degree Project 3
 
-### Dimensional Modeling Goals
-1. Easy to understand
-2. Fast analytical query performance
+A music streaming startup, Sparkify, has grown their user base and song database and want to move their processes and data onto the cloud. Their data resides in S3, in a directory of JSON logs on user activity on the app, as well as a directory with JSON metadata on the songs in their app.
 
-**Star Schema** : Joins with dimensions only. Good for OLAP not for OLTP   
-**3NF** : Lots of expensive joins. Hard to explain business users. 
+As their data engineer, you are tasked with building an ETL pipeline that extracts their data from S3, stages them in Redshift, and transforms data into a set of dimensional tables for their analytics team to continue finding insights in what songs their users are listening to. You'll be able to test your database and ETL pipeline by running queries given to you by the analytics team from Sparkify and compare your results with their expected results.
 
-#### Fact Tables
-Tables records business events and columns have data in quantifiable METRICS like a order(quantity), phone call(duration), book review(rating)
-Fact columns are usually Quantifiable/Numeric & Additive
-Eg:- Total amoount of an invoice could be added to compute total sales(Good fact). Invoice number is numeric makes no sense when you add it(Not a good fact)
+## Project Overview
+Build an ETL pipeline for a database hosted on Redshift. Load the table with data from S3 and perform some query analysis.
 
-#### Dimension Tables
-Record the context of the business events(who, what, where, why)
-Dimension table columns contain ATTRIBUTES like the store at which an item is purchased, or the customer who made the call, date&time, Physical Locations, Human Roles, Goods Sold. 
+## Technical Overview
+Project is implemented in AWS Cloud and uses following products, 
+1. S3 Storage Buckets
+2. Redshift
 
-#### ETL
-1. Extract from 3NF database(Join Tables to get data, discard old data)
-2. Transform by cleaning(inconsistencies, duplication, missing values), Tidiness(changing types, adding new columns)
-3. Structuring & Load data into facts & dimension tables
+## Goal
+1. Review/Analyze datasets from S3 in panda dataframes  
+2. Clean datasets  
+3. Create new clean datasets for loading redshift staging tables  
+4. Launch a redshift cluster and create an IAM role that has read access to S3  
+5. Create redshift tables (staging, fact & dimension)  
+6. Load staging tables using COPY command  
+7. Load fact & dimension tables  
+    a. INSERT via SELECT  
+    b. Unload from staging table and use COPY command to load fact & dimension  
+8. Prepare query for data analysis  
 
-#### Kimball architecture
-According to Kimball's Bus Architecture, data is kept in a common dimension data model shared across different departments. It does not allow for individual department specific data modeling requirements.
-All business process use the same given dimension
+## Project Step-by-Step
+### Gather
+### Assess  
+    #### Quality
+    #### Tidiness  
+### Clean
 
-**Datamart** : It also contains facts & dimension data model but much smaller & separate than dimensional data model and it is focussed only on one department or business. 
-Disadvantage : Inconsistent views and structure across department, due to which its discouraged. 
+## Data Modeling (Panda dataframes)  
+## Data Modeling (Redshift)  
+    **Table** :
+    **<<Tablename>> : Design decisions**,  
 
-#### Inmon's Corporate Information Factor(CIF)
-Data Acquisition -> Enterprise Data Warehouse -> Data Delivery -> Data Marts -> AT Application  
+**factSongPlays**  
+songplay_id, start_time, user_id, level, song_id, artist_id, session_id, location, user_agent
 
-*CIF Contains*  
-* 2 ETL Process
-    1. Source Systems -> 3NF DB
-    2. 3NF DB -> Departmental Data Marts  
-* Enterprise Wide data store(single source of truths for data marts)
-* Datamarts are dimensionally modeled
+**dimUsers**  
+user_id, first_name, last_name, gender, level
 
-#### OLAP Cube
-OLAP Cube is an aggregation of a fact metric on a number of dimensions.   
+**dimSongs**  
+song_id, title, artist_id, year, duration
 
-**OLAP Operations** : 
-**Rollup** : Sum up the sales of each city by Country: eg. US, France(less columns in branch dimension)  
+**dimArtists**  
+artist_id, name, location, lattitude, longitude
 
-**Drill-down** : Decompose the sales of each city into smaller districts(more columns in branch dimension)
+**dimTime**  
+start_time, hour, day, week, month, year, weekday
 
-> Need for atomic data
 
-**Slice** : Reducing N dimension cube to N-1 dimensions by restricting one dimension to a single value. Eg: month='MAR', looking for data in a specific partition.  
+## ETL Setup
+* Setup Redshift Cluster
+* Create tables
+* Populate the dimension table
+* Populate the fact table
+* Run Analytical Queries
+* Drop tables
+* Delete Redshift Cluster
 
-**Dice** : Same dimensions but computing a sub-cube by restricting, some of the values of the dimensions. Eg: month in ['Feb', 'Mar'] and movie in ['Avatar', 'Batman'] and branch='NY', some columns in few partitions.
 
-### Which is better in terms of On premises Vs. Cloud  
-* Scalability - Cloud
-* Operational Cost - On Premise
-* Up front cost - Cloud 
-* Elasticity - Cloud 
+**Create Table Schemas**  
+1. Design schemas for your fact and dimension tables
+Write a SQL CREATE statement for each of these tables in sql_queries.py  
+2. Complete the logic in create_tables.py to connect to the database and create these tables  
+3. Write SQL DROP statements to drop tables in the beginning of create_tables.py if the tables already exist. This way, you can run create_tables.py whenever you want to reset your database and test your ETL pipeline.  
+4. Launch a redshift cluster and create an IAM role that has read access to S3.  
+5. Add redshift database and IAM role info to dwh.cfg.  
+6. Test by running create_tables.py and checking the table schemas in your redshift database. You can use Query Editor in the AWS Redshift console for this.  
 
-## AWS  
-**Things to remember**  
-1. Have to change the region in AWS console to see the cluster. Thats a bit of AWS mess up, i would say as it doesn't work like that in GCP.  
+**ETL Pipeline**  
+1. Implement the logic in etl.py to load data from S3 to staging tables on Redshift.  
+2. Implement the logic in etl.py to load data from staging tables to analytics tables on Redshift.  
+3. Test by running etl.py after running create_tables.py and running the analytic queries on your Redshift database to compare your results with the expected results.  
+4. Delete your redshift cluster when finished.  
 
-2. Recommended to copy the Access key ID & Secret access key from the console rather than copying it from .csv file. 
+## SongPlay Data Analysis Queries
 
-#### Infrastructure as a Code
-1. aws-cli  
-2. AWS sdk (supports lots of programming language like python & nodejs) aka boto3  
-3. Amazon Cloud Formation (JSON description file called as stack)  
 
-#### aws-cli
-```
-aws ec2 describe-instances
+## References
+[1. Warehousing Concepts & Terminologies - Reference Notes](Cloud_Data_Warehouses_Reference_Notes.md)  
+[2. AWS & Redshift - Reference Notes](AWS_and_Redshift.md)
 
-aws ec2 start-instances --instance-ids i-1348636c
+### Video References
+1. ETL Notes from Introduction to Data Warehouses : ETL Demo:Step 3 : Data Analysis
 
-aws sns publish --topic-arn arn:aws:sns:us-east-1:546419318123:OperationsError --message "Script Failure"
+2. ETL Notes from Introduction to Data Warehouses : ETL Demo:Step 4 : Create facts & dimensions table
 
-aws sqs receive-message --queue-url https://queue.amazonaws.com/546419318123/Test
-```
+3. ETL Notes from Introduction to Data Warehouses : ETL Demo:Step 5 : Inserts to facts & dimensions table
 
-#### Creating AWS User
-1. IAM
-2. Click Users
-3. Click Add Users
-4. Fill Username, check Programatic Access
-5. Click Attach existing policies directly and select AdministratorAccess
-6. Click Next:Tags, Next, Create User
-7. Copy Access key id, Secret Access key (this should not be shared publicaly)
+4. ETL Notes from Introduction to Data Warehouses : ETL Demo:Step 6 : Fact & Dimension Analysis
 
-When copied from credentials.csv got the below error when i ran the code.   
-```
-An error occurred (SignatureDoesNotMatch) when calling the ListObjects operation: The request signature we calculated does not match the signature you provided. Check your key and signing method.
-```
-**Resolution** : Copy it from the console, even if it looks same and reload the dwh.cfg file.  
-```
-User : L3Exercise2User
-Access key ID : Access key ID
-Secret access key : Secret access key
-```
-  
-## Redshift
-Redshift is a cluster, it has two types of nodes,
-1. **Leader Node** : 
-    * Coordinates compute notes
-    * Handles external communication
-    * optimizes query execution
-2. **Compute Node** :  
-    * Each with own CPU, memory and Disk
-    * Scale Up : Get more powerful nodes
-    * Scale Out: Get more nodes
+### StackOverFlow 
+How can I safely create a nested directory?
+https://stackoverflow.com/questions/273192/how-can-i-safely-create-a-nested-directory
 
-### Node Slices 
-Each compute node is logically divided into a number of slices. A cluster with n slices, can process n partitions of a tables simultaneously.  
-**i.e.,** A Slice is a CPU and each CPU has disk associated to it.
+Download a folder from S3 using Boto3
+https://stackoverflow.com/questions/49772151/download-a-folder-from-s3-using-boto3
 
-There are two ways to work with Redshift or AWS products,
-1. Click & Fill
-2. Code Way
+This technique is used for reading log_data
+Reading the JSON File with multiple objects in Python
+https://stackoverflow.com/questions/40712178/reading-the-json-file-with-multiple-objects-in-python
 
-### Optimizing Table Design  
-If one has an idea about the frequency of access pattern of a table, it will be easy to design for performance.  
-1. Distribution Style *(specified at the end of table definition)*
-2. Sorting Key - Useful for columns that userd frequently in sorting like the date dimension and its corresponding foregin key in the fact table. *( Specified at table definition on the specific column)*
 
-### Distribution Styles
-* EVEN = Spreading rows even rows to all slices in a round-robin fashion for load-balancing. High cost for joins.
-* ALL  = Small tables are replicated to all slices to speed up joins. Used frequently for dimension tables. Broadcasting is the different name for ALL distribution style. 
-* AUTO = Leaves decision to Redshift. Small tables use ALL strategy. Large tables use EVEN strategy.
-* KEY  = Rows having similar values are placed in same slice. Very useful when a dimension table is too big to be distributed with ALL strategy. In that case, we distribute both the fact table and dimension table using the same dist key. If two tables are distributed on the joining keys, redshift co-locates the rows from both tables on the same slices. 
+"Project 2a - Data Modeling with Postgres" deals with reading *.json files. 
+
+### Learnings
+1. **CAUTION : Listing all objects from udacity-dend bucket in S3**  
+    ```
+    s3 = boto3.resource('s3',
+                        region_name="us-west-2",
+                        aws_access_key_id=KEY,
+                        aws_secret_access_key=SECRET
+                        )
+
+    sampleDbBucket =  s3.Bucket("udacity-dend")
+
+    for my_bucket_object in sampleDbBucket.objects.all():
+        print(my_bucket_object)
+    ```
+2. **Installing Python Packages from a Jupyter Notebook**
+https://jakevdp.github.io/blog/2017/12/05/installing-python-packages-from-jupyter/
+
+If you try running below command in iPython  
 
 ```
-Create table lineorder(
-.
-.
-lo_partkey integer not null distkey
-.
-.)
+pip install geopy
 
-create table part(
-p_partkey interger not null distkey,
-..
-)
+The following command must be run outside of the IPython shell:
+
+    $ pip install geopy
+
+The Python package manager (pip) can only be used from outside of IPython.
+Please reissue the `pip` command in a separate terminal or command prompt.
+
+See the Python documentation for more information on how to install packages:
+
+    https://docs.python.org/3/installing/
+```   
+
+
+Do this to install Python package in Jupyter Notebooks
 ```
-
-### Sorting Key
-Data is sorted before loading into slices. Useful for columns that used frequently in sorting like the date dimension and its corresponding foregin key in the fact table.
-```
-Create table lineorder(
-.
-.
-lo_partkey integer not null sortkey
-.
-.)
-
-create table part(
-p_partkey interger not null sortkey,
-..
-)diststyle all;
+import sys
+!{sys.executable} -m pip install geopy
 ```
 
-> distkey is usually set on large tables, suppose PART table is a big dimension table. Set part_key in PART table pkkey on distkey & LINEORDER(fact table) put distkey on part_key in LINEORDER table.
+3. **Map Plotting**
+https://geopandas.readthedocs.io/en/latest/gallery/create_geopandas_from_pandas.html  
 
-### Ingesting at scale
-1. Use COPY command to transfer data from S3 Staging to Redshift as INSERT statement is slow
-2. Better to break a single file to multiple files to take advantage of parallelism.(Use common prefix or manifest file)
-3. Have S3 & Redshift in the same region
 
+4. **Use Dictionary for JSON**  
+Dictionary .get() can be used to retreive data from json object. If a key is not found, it will return null. Below some address{}, doesn't have city key.
 ```
-COPY sporting_event_ticket FROM 's3://udacity-labs/tickets/split/part'
-CREDENTIALS 'aws_iam_role=arn:aws:iam::464956546:role/dwhRole'
-gzip DELIMITER ':' REGION 'us-west-2';
+loc_details['city'] = geoData['address'].get('city')
+loc_details['state'] = geoData['address'].get('state')
+loc_details['country'] = geoData['address'].get('country')
 ```
+Data
+```
+{'place_id': 497005, 'licence': 'Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright', 'osm_type': 'node', 'osm_id': 158851303, 'lat': '40.0884475', 'lon': '-74.3995939', 'display_name': 'Woodair Estates, Ocean County, New Jersey, USA', 'address': {'hamlet': 'Woodair Estates', 'county': 'Ocean County', 'state': 'New Jersey', 'country': 'USA', 'country_code': 'us'}, 'boundingbox': ['40.0484475', '40.1284475', '-74.4395939', '-74.3595939']}
+```
+--
+df['ts'] = pd.to_datetime(df['ts'], unit='ms')
 
-```
-s3.ObjectSummary(bucket_name='udacity-labs', key='tickets/split/part-00000.csv.gz')
-```
+Quality
+1. log_df : Only page='NextSong' is required
+2. log_df : Delete rows which has userId as null/blank
+3. song_df: Around 6693 rows doesn't have location & lats & long.
+4. song_df: Around 4762 rows have Year has 0
+5. song_df: Format of location is not consistent. London, England/Texas/California - LA
+6. song_df: Around 2926 rows has just the location name doesn't have latitude, longitude
+7. song_df: artist_location has None & Blank
+8. log_df : When auth='Logged Out' it doesn't have userId. But when 'Logged In', userId is captured. Due to this quality issue, you cannot say exactly how long a user id logged in. You can just make a guess by listing the longs.
 
-**Using manifest file**
-```
-{
- "entries":[
-    {"url":"s3://mybucket-alpha/2013-10-04-custdata", "mandatory":true},
-    {"url":"s3://mybucket-alpha/2013-10-05-custdata", "mandatory":true}
- ]
-}
-```
+Tidiness
+1. log_df : convert ts from integer to timestamp
+2. song_df: column num_songs can be removed as it has only one value ( 1 )
 
-```
-COPY customer
-FROM 's3://mybucket/cust.manifest'
-IAM_ROLE 'arn:aws:iam::464956546:role/dwhRole'
-manifest;
-```
-
-COPY command makes automatic best-effort compression decisions for each column
-
-### ETL out of Redshift
-```
-UNLOAD ('select * from venue limit 10')
-to 's3://mybucket/venue_pipe_'
-iam_role 'arn:aws:iam::464956546:role/MyRedshiftRole';
-```
+1. Geo Graph on artist location
+2. User who has listened to most songs. 
+3. User who has spent longest duration listening to songs. 
+4. Popular songs
+5. How many free & paid users
+6. How many users from free became paid
