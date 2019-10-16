@@ -65,10 +65,17 @@ If one has an idea about the frequency of access pattern of a table, it will be 
 2. Sorting Key - Useful for columns that userd frequently in sorting like the date dimension and its corresponding foregin key in the fact table. *( Specified at table definition on the specific column)*
 
 ### Distribution Styles
-* EVEN = Spreading rows even rows to all slices in a round-robin fashion for load-balancing. High cost for joins.
-* ALL  = Small tables are replicated to all slices to speed up joins. Used frequently for dimension tables. Broadcasting is the different name for ALL distribution style. 
-* AUTO = Leaves decision to Redshift. Small tables use ALL strategy. Large tables use EVEN strategy.
-* KEY  = Rows having similar values are placed in same slice. Very useful when a dimension table is too big to be distributed with ALL strategy. In that case, we distribute both the fact table and dimension table using the same dist key. If two tables are distributed on the joining keys, redshift co-locates the rows from both tables on the same slices. 
+**Distribution Style : EVEN**  
+Spreading rows even rows to all slices in a round-robin fashion for load-balancing. High cost for joins.  
+
+**Distribution Style : ALL**  
+Small tables are replicated to all slices to speed up joins. Used frequently for dimension tables. Broadcasting is the different name for ALL distribution style.  
+
+**Distribution Style : AUTO**  
+Leaves decision to Redshift. "Small enough" tables are distributed with an ALL strategy. "Large" tables are distributed with EVEN strategy
+
+**Distribution Style : KEY**  
+Rows having similar values are placed in same slice. Very useful when a dimension table is too big to be distributed with ALL strategy. In that case, we distribute both the fact table and dimension table using the same dist key. If two tables are distributed on the joining keys, redshift co-locates the rows from both tables on the same slices. 
 
 ```
 Create table lineorder(
