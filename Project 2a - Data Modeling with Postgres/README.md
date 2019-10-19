@@ -161,13 +161,13 @@ All the below queries can be executed from sparkify-analytic-queries.ipynb
 ```
 %sql select b.location, count(*) from songs a inner join artists b on a.artist_id = b.artist_id where location != '' group by b.location order by 2 desc limit 3;
 ```
-<img src="AQ1.png" alt="Analytics Query 1"/>  
+<img src="AQ1.PNG" alt="Analytics Query 1"/>  
 
 2. Total number of Free & Paid users - Paid users are more
 ```
 %sql select level, count(*) from songplays group by level;
 ```
-<img src="AQ2.png" alt="Analytics Query 2"/>  
+<img src="AQ2.PNG" alt="Analytics Query 2"/>  
 
 3. Only 8 customers have moved from FREE to PAID service - Further analysis can be done on this front. What made them do it ?
 ```
@@ -179,32 +179,32 @@ All the below queries can be executed from sparkify-analytic-queries.ipynb
 %sql select * from songplays where user_id in ('80') order by start_time asc limit 25;
 
 ```
-<img src="AQ3.png" alt="Analytics Query 3"/>  
+<img src="AQ3.PNG" alt="Analytics Query 3"/>  
 
 4. Top music listeners   
 ```
 %sql select user_id, session_id, count(*) from songplays group by user_id, session_id order by 3 desc limit 5; 
 ```
 
-<img src="AQ4.png" alt="Analytics Query 4"/>  
+<img src="AQ4.PNG" alt="Analytics Query 4"/>  
 
 5. Busiest Days
 ```
 %sql SELECT date(start_time), count(*) FROM songplays group by date(start_time) order by 2 desc LIMIT 5;
 ```
-<img src="AQ5.png" alt="Analytics Query 5"/>  
+<img src="AQ5.PNG" alt="Analytics Query 5"/>  
 
 6. Most played songs
 ```
 %sql select song, count(*) from songplays group by song order by 2 desc limit 5;
 ```
-<img src="AQ6.png" alt="Analytics Query 6"/>  
+<img src="AQ6.PNG" alt="Analytics Query 6"/>  
 
 7. Users most active during below timing
 ```
 %sql select hour, count(*) from time group by hour order by 2 desc limit 5;
 ```
-<img src="AQ7.png" alt="Analytics Query 7"/>  
+<img src="AQ7.PNG" alt="Analytics Query 7"/>  
 
 ### Work notes
 1. This took some time
