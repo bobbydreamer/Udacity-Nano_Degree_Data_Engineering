@@ -9,17 +9,6 @@
 2. AWS sdk (supports lots of programming language like python & nodejs) aka boto3  
 3. Amazon Cloud Formation (JSON description file called as stack)  
 
-#### aws-cli
-```
-aws ec2 describe-instances
-
-aws ec2 start-instances --instance-ids i-1348636c
-
-aws sns publish --topic-arn arn:aws:sns:us-east-1:546419318123:OperationsError --message "Script Failure"
-
-aws sqs receive-message --queue-url https://queue.amazonaws.com/546419318123/Test
-```
-
 #### Creating AWS User
 1. IAM
 2. Click Users
@@ -41,6 +30,10 @@ Secret access key : Secret access key
 ```
   
 ## Redshift
+1. Column-storage : Can be used calculating values in a column of very big table.  
+2. Massively Parallel Processing(MPP) databases parallelize the execution of one query on multiple CPUs/Machines. 
+3. 
+
 Redshift is a cluster, it has two types of nodes,
 1. **Leader Node** : 
     * Coordinates compute notes
@@ -50,6 +43,8 @@ Redshift is a cluster, it has two types of nodes,
     * Each with own CPU, memory and Disk
     * Scale Up : Get more powerful nodes
     * Scale Out: Get more nodes
+
+![alt text](./images/Redshift_Architecture.PNG "Redshift Architecture")
 
 ### Node Slices 
 Each compute node is logically divided into a number of slices. A cluster with n slices, can process n partitions of a tables simultaneously.  
