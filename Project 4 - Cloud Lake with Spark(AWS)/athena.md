@@ -48,7 +48,7 @@ artist_id string, name string, location string, latitude float, longitude float
 
 ![alt text](./images/athena/Athena5.png "Athena")
 
-If the table is partitioned. Like for example table time partitioned by year & month. Skip the year & month in "bulk add columns" screen like below, 
+If the table is partitioned. Like for example table time partitioned by year & month. Skip the year & month in "bulk add columns" screen like below,  
 ![alt text](./images/athena/Athena2A.png "Athena")
 
 Mention the partition column in the same order as in when parquet file was created as the folder structure will be in that order.  

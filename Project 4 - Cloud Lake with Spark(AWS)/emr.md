@@ -51,7 +51,7 @@ Follow the below instructions in EC2 Dashboard for the cluster to allow inbound 
 
 Follow the below instructions to generate .ppk file using puTTYgen using .pem generated earlier in EC2-Keypair.   
 
-Click Load and select the spark-cluster.pem file
+Click Load and select the spark-cluster.pem file  
 ![alt text](./images/emr/PuttyKeyGen1.png "puTTYgen")
 
 Click OK  
@@ -99,7 +99,7 @@ In category click SSH --> Auth --> Click browse and select .ppk file you had gen
 Click Yes  
 ![alt text](./images/emr/Putty3.png "puTTY")
 
-welcome to EMR 
+Welcome to EMR  
 ![alt text](./images/emr/Putty4.png "puTTY")
 
 Command ```aws configure``` will let you know KEY, SECRET and othe default settings.   

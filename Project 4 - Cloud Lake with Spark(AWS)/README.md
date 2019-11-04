@@ -314,7 +314,7 @@ Still did not work
 
 ### **Had issues in reading .JSON datasets from S3**
 Took a long time to execute but 0 rows.  
-![alt text](./images/emrNotebook/song_df-s3nodata.png "SCP")
+![alt text](./images/emr-jupyter-notebook/song_df-s3nodata.png "SCP")
 
 **Resolution** : Download all the files from the S3 Bucket outside of spark to local and analyzed it. Also another thought is dont assume spark will read all the subdirectories give path with asterix. 
 
