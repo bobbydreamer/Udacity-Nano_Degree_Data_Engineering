@@ -2,6 +2,7 @@
 ## Project Overview
 ## Technical Overview
 ## Goal
+## How to run
 ## Project Step-by-Step
 ### Gather
 ### Assess  
