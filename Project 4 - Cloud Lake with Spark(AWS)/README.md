@@ -265,7 +265,7 @@ You might need to do this
 https://github.com/aws/aws-cli/issues/3542
 pip install botocore==1.10.82
 
-Resolution : changed approach to use AWS cli only before installing boto3. 
+**Resolution** : changed approach to use AWS cli only before installing boto3. 
 
 ### **Not able to read S3 Bucket from Jupyter Notebooks**
 
@@ -348,7 +348,7 @@ Traceback (most recent call last):
     import boto3
 ModuleNotFoundError: No module named 'boto3'
 ```
-Resolution : Changed the approach
+**Resolution** : Changed the approach
 
 ### **Python program looking for file in HDFS  filesystem**
 
