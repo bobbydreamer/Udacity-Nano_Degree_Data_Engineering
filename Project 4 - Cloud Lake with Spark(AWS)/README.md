@@ -519,7 +519,7 @@ import sys
 !{sys.executable} -m pip install numpy
 ```
 
-* Solution : Change the kernel to PySpark and install packages
+* **Solution** : Change the kernel to PySpark and install packages
 ```
 sc.list_packages()
 
