@@ -1,13 +1,12 @@
 ## AWS  
 **Things to remember**  
 1. Have to change the region in AWS console to see the cluster. Thats a bit of AWS mess up, i would say as it doesn't work like that in GCP.  
-
 2. Recommended to copy the Access key ID & Secret access key from the console rather than copying it from .csv file. 
 
 #### Infrastructure as a Code
 1. aws-cli  
 2. AWS sdk (supports lots of programming language like python & nodejs) aka boto3  
-3. Amazon Cloud Formation (JSON description file called as stack)  
+3. Amazon Cloud Formation (JSON/YAML file containing details of infrastructure to be built called as stack)  
 
 #### Creating AWS User
 1. IAM
@@ -30,9 +29,12 @@ Secret access key : Secret access key
 ```
   
 ## Redshift
+An Amazon Redshift cluster consists of nodes. Each cluster has a leader node and one or more compute nodes. The leader node receives queries from client applications, parses the queries, and develops query execution plans. The leader node then coordinates the parallel execution of these plans with the compute nodes and aggregates the intermediate results from these nodes. It then finally returns the results back to the client applications.
+
+Compute nodes execute the query execution plans and transmit data among themselves to serve these queries. The intermediate results are sent to the leader node for aggregation before being sent back to the client applications.
+
 1. Column-storage : Can be used calculating values in a column of very big table.  
 2. Massively Parallel Processing(MPP) databases parallelize the execution of one query on multiple CPUs/Machines. 
-3. 
 
 Redshift is a cluster, it has two types of nodes,
 1. **Leader Node** : 
@@ -144,3 +146,36 @@ UNLOAD ('select * from venue limit 10')
 to 's3://mybucket/venue_pipe_'
 iam_role 'arn:aws:iam::464956546:role/MyRedshiftRole';
 ```
+
+### Redshift Cluster Creation
+1. Create an IAM Role. Attach below permissions policies,
+    * AmazonS3ReadOnlyAccess - ReadOnly access to S3
+    * AmazonRedshiftQueryEditor - To use Redshift Query Editor
+
+![alt text](./images/RS1.png "IAM for Redshift")
+
+2. Create Cluster with below parameters and select the IAM Role previously created.
+```
+[CLUSTER]
+DWH_DB=dwh
+DWH_DB_USER=dwhuser
+DWH_DB_PASSWORD=Passw0rd
+DWH_PORT=5439
+DWH_CLUSTER_TYPE=multi-node
+DWH_NUM_NODES=4
+DWH_NODE_TYPE=dc2.large
+DWH_CLUSTER_IDENTIFIER=dwhCluster
+[IAM_ROLE]
+DWH_IAM_ROLE_NAME=dwhRole
+ARN='arn:aws:iam::164084742828:role/dwhRole'
+```
+![alt text](./images/RS2.png "IAM for Redshift")  
+![alt text](./images/RS3.png "IAM for Redshift")  
+![alt text](./images/RS4.png "IAM for Redshift")  
+![alt text](./images/RS5a.png "IAM for Redshift")  
+![alt text](./images/RS5b.png "IAM for Redshift")  
+![alt text](./images/RS6-ClusterParameterGroup.png "IAM for Redshift")  
+![alt text](./images/rs-sg-inbound-rules.png "IAM for Redshift")  
+
+3. Connect to cluster via Query Editor
+

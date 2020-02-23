@@ -261,9 +261,10 @@ Copyings files from S3 to current EC2 directory
 aws s3 sync s3://sushanth-dend-datalake-programs . 
 ```
 
-You might need to do this
-https://github.com/aws/aws-cli/issues/3542
+You might need to do this. [check link](https://github.com/aws/aws-cli/issues/3542)  
+```
 pip install botocore==1.10.82
+```
 
 **Resolution** : changed approach to use AWS cli only before installing boto3. 
 

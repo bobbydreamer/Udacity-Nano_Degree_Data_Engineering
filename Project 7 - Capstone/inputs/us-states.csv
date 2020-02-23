@@ -1,0 +1,63 @@
+code|state|status
+AL|Alabama|state
+AK|Alaska|state
+AZ|Arizona|state
+AR|Arkansas|state
+CA|California|state
+CO|Colorado|state
+CT|Connecticut|state
+DE|Delaware|state
+FL|Florida|state
+GA|Georgia|state
+HI|Hawaii|state
+ID|Idaho|state
+IL|Illinois|state
+IN|Indiana|state
+IA|Iowa|state
+KS|Kansas|state
+KY|Kentucky|state
+LA|Louisiana|state
+ME|Maine|state
+MD|Maryland|state
+MA|Massachusetts|state
+MI|Michigan|state
+MN|Minnesota|state
+MS|Mississippi|state
+MO|Missouri|state
+MT|Montana|state
+NE|Nebraska|state
+NV|Nevada|state
+NH|New Hampshire|state
+NJ|New Jersey|state
+NM|New Mexico|state
+NY|New York|state
+NC|North Carolina|state
+ND|North Dakota|state
+OH|Ohio|state
+OK|Oklahoma|state
+OR|Oregon|state
+PA|Pennsylvania|state
+RI|Rhode Island|state
+SC|South Carolina|state
+SD|South Dakota|state
+TN|Tennessee|state
+TX|Texas|state
+UT|Utah|state
+VT|Vermont|state
+VA|Virginia|state
+WA|Washington|state
+WV|West Virginia|state
+WI|Wisconsin|state
+WY|Wyoming|state
+AA|Armed Forces Americas (except Canada)|Armed Forces
+AE|Armed Forces Africa,Armed Forces Canada,Armed Forces Europe,Armed Forces Middle East|Armed Forces
+AP|Armed Forces Pacific|Armed Forces
+DC|District of Columbia|Territory
+AS|American Samoa|Territory
+GU|Guam|Territory
+MP|Northern Mariana Islands|Territory
+PR|Puerto Rico|Territory
+VI|Virgin Islands|Territory
+PW|Palau|Freely associated states
+FM|Federated States of Micronesia|Freely associated states
+MH|Marshall Islands|Freely associated states

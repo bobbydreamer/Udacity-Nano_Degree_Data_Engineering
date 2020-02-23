@@ -1,0 +1,10 @@
+# Use below command to verify if file is ignored or not
+# If the file is displayed as part of the command, 
+# it means the file is ignored otherwise, its tracked.
+
+# git check-ignore .\merged_song_data.json
+# git check-ignore .\aws\credentials.cfg
+
+# AWS Key & Secret has been masked
+# aws/
+

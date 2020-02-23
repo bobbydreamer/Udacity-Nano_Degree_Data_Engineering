@@ -1,0 +1,285 @@
+location,code
+Abidjan,ABJ
+Abu Dhabi (Beirut Files),BRF
+Accra,ACC
+Alexandria,ALX
+Almaty,ATA
+Amsterdam,AMS
+Antananarivo,ANT
+Apia,APA
+Asmara,ASM
+Athens,ATH
+Auckland,ACK
+Baku,BKU
+Bandar Seri Begawan,BSB
+Bangui,BGI
+Barcelona,BRC
+Beijing,BEJ
+Belfast,BLF
+Belmopan,BLZ
+Bern,BEN
+Bissau,BIS
+Bonn,BNN
+Brasilia,BRA
+Brazzaville,BRZ
+Brussels,BRS
+Budapest,BDP
+Bujumbura,BUJ
+Calgary,CLG
+Cape Town,CPT
+Casablanca,CSB
+Chengdu,CHE
+Chiang Mai,CHN
+Ciudad Juarez,CDJ
+Conakry,CRY
+Cotonou,COT
+Dakar,DKR
+Dar es Salaam,DRS
+Dhaka,DHK
+Djibouti,DJI
+Douala,DOU
+Dublin,DBL
+Dushanbe,DHB
+Erbil,ERB
+Frankfurt am Main,FRN
+Fukuoka,FKK
+Geneva,GVA
+Georgetown,GEO
+Guangzhou,GUZ
+Guayaquil,GYQ
+Halifax,HLF
+Hamilton,HML
+Harare,HRE
+Helsinki,HLS
+Ho Chi Minh City,HCM
+Honiara,HON
+Islamabad,ISL
+Izmir,IZM
+Jeddah,JDD
+Johannesburg,JHN
+Kabul,KBL
+Kampala,KMP
+Kathmandu,KDU
+Khartoum,KHT
+Kingston,KNG
+Kolkata (Calcutta),CLC
+Koror,KOR
+Kuala Lumpur,KLL
+Kyiv,KEV
+Lagos,LGS
+Libreville,LIB
+Lima,LMA
+Ljubljana,LJU
+London,LND
+Lubumbashi,LBM
+Luxembourg,LXM
+Madrid,MDD
+Malabo,MBO
+Manama,MNA
+Maputo,MAP
+Marseille,MRL
+Maseru,MAS
+Mazatlan,MAZ
+Medan,MDN
+Merida,MER
+Milan,MLN
+Mogadishu,MGD
+Monterrey,MTR
+Montreal,MTL
+Moscow,MOS
+Munich,MUN
+Naha,NHA
+Naples,NPL
+Nagoya,NGY
+New Delhi,NWD
+Nicosia,NCS
+Nuevo Laredo,NVL
+Oporto,OPT
+Osaka Kobe,KBO
+Ottawa,OTT
+Palermo,PLR
+Paramaribo,PRM
+Perth,PRT
+Phnom Penh,PHP
+Ponta Delgada,PTD
+Port Louis,PTL
+Port of Spain,PTS
+Poznan,POZ
+Praia,PIA
+Pristina,PRI
+Quebec,QBC
+Rabat,RBT
+Recife,RCF
+Reykjavik,RKJ
+Rio de Janeiro,RDJ
+Rome,RME
+St. Petersburg,SPT
+Sanaa,SAA
+San Salvador,SNS
+Santo Domingo,SDO
+Sapporo,SPP
+Seoul,SEO
+Shenyang,SNY
+Skopje,SKO
+Stockholm,STK
+Stuttgart,STT
+Suva,SUV
+AIT Taipei *,TAI
+Tashkent,THT
+Tegucigalpa,TGG
+Thessaloniki,TES
+Tijuana (Consular Annex),TJT
+Tokyo,TKY
+Toulouse,TOU
+Tunis,TNS
+U.S. Mission to the United Nations,USN
+Vancouver,VAC
+Vienna,VNN
+Vilnius,VIL
+Warsaw,WRW
+Windhoek,WHK
+Yaounde,YDE
+Yerevan,YRV
+Zurich,ZRH
+Abu Dhabi,ABD
+Abuja,ABU
+Addis Ababa,ADD
+Algiers,ALG
+Amman,AMM
+Ankara,ANK
+Antwerp,ATW
+Ashgabat,AKD
+Asuncion,ASN
+Baghdad,BGH
+Bamako,BAM
+Bangkok,BNK
+Banjul,BAN
+Barranquilla,BRR
+Beirut,BRT
+Belgrade,BLG
+Berlin,BRL
+Bishkek,BKK
+Bogota,BGT
+Bordeaux,BRD
+Bratislava,BTS
+Bridgetown,BGN
+Bucharest,BCH
+Buenos Aires,BNS
+Cairo,CRO
+Canberra,CNB
+Caracas,CRS
+Cebu,CBU
+Chennai (Madras),MDR
+Chisinau,CHS
+Colombo,CLM
+Copenhagen,CPN
+Curacao,CRC
+Damascus,DMS
+Dhahran,DHR
+Dili,DIL
+Doha,DOH
+Dubai,DUB
+Durban,DRB
+Edinburgh,EDN
+Florence,FLR
+Freetown,FTN
+Gaborone,GAB
+Genoa,GEN
+Guadalajara,GDL
+Guatemala,GTM
+The Hague,HAG
+Hamburg,HMB
+Hanoi,HAN
+Havana,HAV
+Hermosillo,HER
+Hong Kong,HNK
+Hyderabad,HYD
+Istanbul,IST
+Jakarta,JAK
+Jerusalem,JRS
+Juba,JBA
+Kaduna,KAD
+Karachi,KRC
+Kaohsiung,KAO
+Kigali,KGL
+Kinshasa,KIN
+Kolonia,KOL
+Krakow,KRK
+Kuwait,KWT
+La Paz,LPZ
+Lahore,LHR
+Lilongwe,LIL
+Lisbon,LSB
+Lome,LOM
+Luanda,LUA
+Lusaka,LUS
+Lyon,LYN
+Majuro,MAJ
+Managua,MNG
+Manila,MNL
+Maracaibo,MRC
+Martinique,MRT
+Matamoros,MTM
+Mbabane,MBA
+Melbourne,MLB
+Mexico City,MEX
+Minsk,MSK
+Monrovia,MRV
+Montevideo,MTV
+Moroni,MOR
+Mumbai (Bombay),BMB
+Muscat,MST
+Nairobi,NRB
+Nassau,NSS
+N'Djamena,NDJ
+Niamey,NMY
+Nogales,NGL
+Nouakchott,NUK
+Nur-Sultanÿÿÿ,AST
+Oran,ORN
+Oslo,OSL
+Ouagadougou,OUG
+Panama,PNM
+Paris,PRS
+Peshawar,PSH
+Podgorica,POD
+Port?au?Prince,PTP
+Port Moresby,PTM
+Porto Alegre,PTA
+Prague,PRG
+Pretoria,PRA
+Pusan,PSN
+Quito,QTO
+Rangoon,RNG
+Rennes,RNN
+Riga,RGA
+Riyadh,RID
+St. John's (Antigua and Barbuda),SJS
+Salvador da Bahia,SLV
+San Jose,SNJ
+Santiago,SNT
+Sao Paulo,SPL
+Sarajevo,SAR
+Shanghai,SHG
+Singapore,SGP
+Sofia,SOF
+Strasbourg,STR
+Surabaya,SRB
+Sydney,SYD
+Tallinn,TAL
+Tbilisi,TBL
+Tel Aviv,TLV
+Tijuana,TJN
+Tirana,TIA
+Toronto,TRT
+Tripoli,TRP
+Ulaanbaatar,ULN
+Valletta,VLL
+Victoria,VTR
+Vientiane,VNT
+Vladivostok,VLA
+Wellington,WLL
+Wuhan,WUH
+Yekaterinberg,YEK
+Zagreb,ZGB
+Department (VO),DPT

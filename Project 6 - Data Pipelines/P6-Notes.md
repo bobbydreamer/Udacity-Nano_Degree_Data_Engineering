@@ -32,6 +32,30 @@ Airflow is used coordinate data movements between other data storage and data pr
 
 * [Apache Airflow Concepts](http://airflow.apache.org/concepts.html)
 
+### Airflow’s Architecture
+At its core, Airflow is simply a queuing system built on top of a metadata database. The database stores the state of queued tasks and a scheduler uses these states to prioritize how other tasks are added to the queue. This functionality is orchestrated by four primary components (refer to the Left Subpanel of Figure 3.2):  
+
+1. Metadata Database: this database stores information regarding the state of tasks. Database updates are performed using an abstraction layer implemented in SQLAlchemy. This abstraction layer cleanly separates the function of the remaining components of Airflow from the database.  
+
+2. Scheduler: The Scheduler is a process that uses DAG definitions in conjunction with the state of tasks in the metadata database to decide which tasks need to be executed, as well as their execution priority. The Scheduler is generally run as a service.  
+3. Executor: The Executor is a message queuing process that is tightly bound to the Scheduler and determines the worker processes that actually execute each scheduled task. There are different types of Executors, each of which uses a specific class of worker processes to execute tasks. For example, the LocalExecutor executes tasks with parallel processes that run on the same machine as the Scheduler process. Other Executors, like the CeleryExecutor execute tasks using worker processes that exist on a separate cluster of worker machines.  
+4. Workers: These are the processes that actually execute the logic of tasks, and are determined by the Executor being used.
+
+## What is Dag?
+DAGs are a special subset of graphs in which the edges between nodes have a specific direction, and no cycles exist. When we say “no cycles exist” what we mean is the nodes cant create a path back to themselves.
+* Nodes: A step in the data pipeline process.
+* Edges: The dependencies or relationships other between nodes.
+
+In Airflow all workflows are DAGs. A Dag consists of operators. An operator defines an individual task that needs to be performed. There are different types of operators available( As given on Airflow Website):  
+* BashOperator - executes a bash command
+* PythonOperator - calls an arbitrary Python function
+* EmailOperator - sends an email
+* SimpleHttpOperator - sends an HTTP request
+* MySqlOperator, SqliteOperator, PostgresOperator, MsSqlOperator, OracleOperator, JdbcOperator, etc. - executes a SQL command
+* Sensor - waits for a certain time, file, database row, S3 key, etc…  
+
+You can also come up with a custom operator as per your need.
+
 Sample Code
 ```
 # Instructions
@@ -1575,7 +1599,7 @@ union all
 select 'time', count(*) from time
 union all
 select 'users', count(*) from users;
-```
+
 
 truncate table songplays;
 truncate table staging_events;
@@ -1584,3 +1608,7 @@ truncate table artists;
 truncate table songs;
 truncate table time;
 truncate table users;
+```
+
+### References
+1. [Medium : Understanding Apache Airflow’s key concepts](https://medium.com/@dustinstansbury/understanding-apache-airflows-key-concepts-a96efed52b1a)

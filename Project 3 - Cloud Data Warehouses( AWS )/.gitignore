@@ -1,6 +1,7 @@
 # This file contains AWS Key & Secret.
 # Should not be uploaded to github or anywhere
 dwh-keysecret.cfg
+__pycache__
 .ipynb_checkpoints/
 log_data/
 song_data/

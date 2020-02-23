@@ -1,0 +1,850 @@
+CREATE TABLE IF NOT EXISTS "fact_ids" (
+"admnum" VARCHAR,
+  "CoC" VARCHAR,
+  "CoR" VARCHAR,
+  "PoE" VARCHAR,
+  "landing_state" VARCHAR,
+  "age" VARCHAR,
+  "visa_issued_in" VARCHAR,
+  "occup" VARCHAR,
+  "biryear" VARCHAR,
+  "gender" VARCHAR,
+  "airline" VARCHAR,
+  "fltno" VARCHAR,
+  "visatype" VARCHAR,
+  "arrival_mode" VARCHAR,
+  "visit_purpose" VARCHAR,
+  "arrival_dt" TIMESTAMP,
+  "departure_dt" TIMESTAMP,
+  "DaysinUS" DECIMAL(10,6),
+  "added_to_i94" TIMESTAMP,
+  "allowed_until" TIMESTAMP,
+  "entry_exit" VARCHAR,
+  CONSTRAINT fact_ids_pk PRIMARY KEY ("admnum")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_visatype" (
+"visatype" VARCHAR,
+  "description" VARCHAR,
+  CONSTRAINT dim_visatype_pk PRIMARY KEY ("visatype")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_ac" (
+"type" VARCHAR,
+"name" VARCHAR,
+  "elevation_ft" DECIMAL(10,6),
+  "continent" DECIMAL(10,6),
+  "iso_country" VARCHAR,
+  "iso_region" VARCHAR,
+  "municipality" VARCHAR,
+  "iata_code" VARCHAR,
+  "local_code" VARCHAR,
+  "coordinates" VARCHAR,
+  "longitude" VARCHAR,
+  "latitude" VARCHAR,
+  "state" VARCHAR,
+  "facilities" VARCHAR,
+  CONSTRAINT dim_ac_pk PRIMARY KEY ("type", "name")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_USPoE" (
+"code" VARCHAR,
+  "citystate" VARCHAR,
+  "city" VARCHAR,
+  "state" VARCHAR,
+  CONSTRAINT dim_USPoE_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_uszips" (
+"zip" INTEGER,
+  "lat" DECIMAL(10,6),
+  "lng" DECIMAL(10,6),
+  "city" VARCHAR,
+  "state_id" VARCHAR,
+  "state_name" VARCHAR,
+  "population" INTEGER,
+  "density" DECIMAL(10,6),
+  "county_fips" INTEGER,
+  "county_name" VARCHAR,
+  CONSTRAINT dim_uszips_pk PRIMARY KEY ("zip")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_i94countrycode" (
+"code" VARCHAR,
+  "country" VARCHAR,
+  CONSTRAINT dim_i94countrycode_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_usdp" (
+"State" VARCHAR,
+"City" VARCHAR,
+  "Median_Age" DECIMAL(10,6),
+  "State_Code" VARCHAR,
+  "Male Population" INTEGER,
+  "Female_Population" INTEGER,
+  "Total_Population" DECIMAL(10,6),
+  "Number_of_Veterans" INTEGER,
+  "Foreign_born" INTEGER,
+  CONSTRAINT dim_usdp_pk PRIMARY KEY ("State", "City")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_usdr" (
+"State" VARCHAR,
+"City" VARCHAR,
+  "State_Code" VARCHAR,
+  "American_Indian_and_Alaska_Native" INTEGER,
+  "Asian" INTEGER,
+  "Black_or_African_American" INTEGER,
+  "Hispanic_or_Latino" INTEGER,
+  "White" INTEGER,
+  CONSTRAINT dim_usdr_pk PRIMARY KEY ("State", "City")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_temper" (
+"dt" TIMESTAMP,
+"City" VARCHAR,
+"Country" VARCHAR,
+  "AverageTemperature" DECIMAL(10,6),
+  CONSTRAINT dim_temper_pk PRIMARY KEY ("dt", "City", "Country")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_alc" (
+"code" VARCHAR,
+  "description" VARCHAR,
+  CONSTRAINT dim_alc_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_visapost" (
+"code" VARCHAR,
+  "Post" VARCHAR,
+  CONSTRAINT dim_visapost_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_alpha2countrycode" (
+"country" VARCHAR,
+  "alpha2" VARCHAR,
+  "alpha3" VARCHAR,
+  "Num" INTEGER,
+  "ITU" VARCHAR,
+  "GEC" VARCHAR,
+  "IOC" VARCHAR,
+  "FIFA" VARCHAR,
+  "DS" VARCHAR,
+  "WMO" VARCHAR,
+  "GAUL" VARCHAR,
+  "MARC" VARCHAR,
+  "dial" VARCHAR,
+  "independent" VARCHAR,
+  "VisaRequired" VARCHAR,
+  CONSTRAINT dim_alpha2countrycode_pk PRIMARY KEY ("country")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_iap" (
+"Airport" VARCHAR,
+"IATA" VARCHAR,
+  "Location" VARCHAR,
+  CONSTRAINT dim_iap_pk PRIMARY KEY ("Airport", "IATA")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_wc" (
+"city" VARCHAR,
+"country" VARCHAR,
+  "city_ascii" VARCHAR,
+  "lat" DECIMAL(10,6),
+  "lng" DECIMAL(10,6),
+  "iso2" VARCHAR,
+  "iso3" VARCHAR,
+  "admin_name" VARCHAR,
+  "capital" VARCHAR,
+  "population" DECIMAL(10,6),
+  "id" INTEGER,
+  CONSTRAINT dim_wc_pk PRIMARY KEY ("city", "country")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_USstatecode" (
+"code" VARCHAR,
+  "state" VARCHAR,
+  "status" VARCHAR,
+  CONSTRAINT dim_USstatecode_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "fact_ids" (
+"CoC" VARCHAR,
+  "CoR" VARCHAR,
+  "PoE" VARCHAR,
+  "landing_state" VARCHAR,
+  "age" VARCHAR,
+  "visa_issued_in" VARCHAR,
+  "occup" VARCHAR,
+  "biryear" VARCHAR,
+  "gender" VARCHAR,
+  "airline" VARCHAR,
+  "admnum" VARCHAR,
+  "fltno" VARCHAR,
+  "visatype" VARCHAR,
+  "arrival_mode" VARCHAR,
+  "visit_purpose" VARCHAR,
+  "arrival_dt" TIMESTAMP,
+  "departure_dt" TIMESTAMP,
+  "DaysinUS" DECIMAL(10,6),
+  "added_to_i94" TIMESTAMP,
+  "allowed_until" TIMESTAMP,
+  "entry_exit" VARCHAR,
+  CONSTRAINT fact_ids_pk PRIMARY KEY ("admnum")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_visatype" (
+"visatype" VARCHAR,
+  "description" VARCHAR,
+  CONSTRAINT dim_visatype_pk PRIMARY KEY ("visatype")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_ac" (
+"type" VARCHAR,
+  "name" VARCHAR,
+  "elevation_ft" DECIMAL(10,6),
+  "continent" DECIMAL(10,6),
+  "iso_country" VARCHAR,
+  "iso_region" VARCHAR,
+  "municipality" VARCHAR,
+  "iata_code" VARCHAR,
+  "local_code" VARCHAR,
+  "coordinates" VARCHAR,
+  "longitude" VARCHAR,
+  "latitude" VARCHAR,
+  "state" VARCHAR,
+  "facilities" VARCHAR,
+  CONSTRAINT dim_ac_pk PRIMARY KEY ("type", "name")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_USPoE" (
+"code" VARCHAR,
+  "citystate" VARCHAR,
+  "city" VARCHAR,
+  "state" VARCHAR,
+  CONSTRAINT dim_USPoE_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_uszips" (
+"zip" INTEGER,
+  "lat" DECIMAL(10,6),
+  "lng" DECIMAL(10,6),
+  "city" VARCHAR,
+  "state_id" VARCHAR,
+  "state_name" VARCHAR,
+  "population" INTEGER,
+  "density" DECIMAL(10,6),
+  "county_fips" INTEGER,
+  "county_name" VARCHAR,
+  CONSTRAINT dim_uszips_pk PRIMARY KEY ("zip")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_i94countrycode" (
+"code" VARCHAR,
+  "country" VARCHAR,
+  CONSTRAINT dim_i94countrycode_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_usdp" (
+"State" VARCHAR,
+  "City" VARCHAR,
+  "Median_Age" DECIMAL(10,6),
+  "State_Code" VARCHAR,
+  "Male Population" INTEGER,
+  "Female_Population" INTEGER,
+  "Total_Population" DECIMAL(10,6),
+  "Number_of_Veterans" INTEGER,
+  "Foreign_born" INTEGER,
+  CONSTRAINT dim_usdp_pk PRIMARY KEY ("State", "City")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_usdr" (
+"State" VARCHAR,
+  "City" VARCHAR,
+  "State_Code" VARCHAR,
+  "American_Indian_and_Alaska_Native" INTEGER,
+  "Asian" INTEGER,
+  "Black_or_African_American" INTEGER,
+  "Hispanic_or_Latino" INTEGER,
+  "White" INTEGER,
+  CONSTRAINT dim_usdr_pk PRIMARY KEY ("State", "City")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_temper" (
+"dt" TIMESTAMP,
+  "AverageTemperature" DECIMAL(10,6),
+  "City" VARCHAR,
+  "Country" VARCHAR,
+  CONSTRAINT dim_temper_pk PRIMARY KEY ("dt", "City", "Country")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_alc" (
+"code" VARCHAR,
+  "description" VARCHAR,
+  CONSTRAINT dim_alc_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_visapost" (
+"Post" VARCHAR,
+  "code" VARCHAR,
+  CONSTRAINT dim_visapost_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_alpha2countrycode" (
+"country" VARCHAR,
+  "alpha2" VARCHAR,
+  "alpha3" VARCHAR,
+  "Num" INTEGER,
+  "ITU" VARCHAR,
+  "GEC" VARCHAR,
+  "IOC" VARCHAR,
+  "FIFA" VARCHAR,
+  "DS" VARCHAR,
+  "WMO" VARCHAR,
+  "GAUL" VARCHAR,
+  "MARC" VARCHAR,
+  "dial" VARCHAR,
+  "independent" VARCHAR,
+  "VisaRequired" VARCHAR,
+  CONSTRAINT dim_alpha2countrycode_pk PRIMARY KEY ("country")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_iap" (
+"Location" VARCHAR,
+  "Airport" VARCHAR,
+  "IATA" VARCHAR,
+  CONSTRAINT dim_iap_pk PRIMARY KEY ("Airport", "IATA")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_wc" (
+"city" VARCHAR,
+  "city_ascii" VARCHAR,
+  "lat" DECIMAL(10,6),
+  "lng" DECIMAL(10,6),
+  "country" VARCHAR,
+  "iso2" VARCHAR,
+  "iso3" VARCHAR,
+  "admin_name" VARCHAR,
+  "capital" VARCHAR,
+  "population" DECIMAL(10,6),
+  "id" INTEGER,
+  CONSTRAINT dim_wc_pk PRIMARY KEY ("city", "country")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_USstatecode" (
+"code" VARCHAR,
+  "state" VARCHAR,
+  "status" VARCHAR,
+  CONSTRAINT dim_USstatecode_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "fact_ids" (
+"CoC" VARCHAR,
+  "CoR" VARCHAR,
+  "PoE" VARCHAR,
+  "landing_state" VARCHAR,
+  "age" VARCHAR,
+  "visa_issued_in" VARCHAR,
+  "occup" VARCHAR,
+  "biryear" VARCHAR,
+  "gender" VARCHAR,
+  "airline" VARCHAR,
+  "admnum" VARCHAR,
+  "fltno" VARCHAR,
+  "visatype" VARCHAR,
+  "arrival_mode" VARCHAR,
+  "visit_purpose" VARCHAR,
+  "arrival_dt" TIMESTAMP,
+  "departure_dt" TIMESTAMP,
+  "DaysinUS" DECIMAL(10,6),
+  "added_to_i94" TIMESTAMP,
+  "allowed_until" TIMESTAMP,
+  "entry_exit" VARCHAR,
+  CONSTRAINT fact_ids_pk PRIMARY KEY ("admnum")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_visatype" (
+"visatype" VARCHAR,
+  "description" VARCHAR,
+  CONSTRAINT dim_visatype_pk PRIMARY KEY ("visatype")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_ac" (
+"type" VARCHAR,
+  "name" VARCHAR,
+  "elevation_ft" DECIMAL(10,6),
+  "continent" DECIMAL(10,6),
+  "iso_country" VARCHAR,
+  "iso_region" VARCHAR,
+  "municipality" VARCHAR,
+  "iata_code" VARCHAR,
+  "local_code" VARCHAR,
+  "coordinates" VARCHAR,
+  "longitude" VARCHAR,
+  "latitude" VARCHAR,
+  "state" VARCHAR,
+  "facilities" VARCHAR,
+  CONSTRAINT dim_ac_pk PRIMARY KEY ("type", "name")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_USPoE" (
+"code" VARCHAR,
+  "citystate" VARCHAR,
+  "city" VARCHAR,
+  "state" VARCHAR,
+  CONSTRAINT dim_USPoE_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_uszips" (
+"zip" INTEGER,
+  "lat" DECIMAL(10,6),
+  "lng" DECIMAL(10,6),
+  "city" VARCHAR,
+  "state_id" VARCHAR,
+  "state_name" VARCHAR,
+  "population" INTEGER,
+  "density" DECIMAL(10,6),
+  "county_fips" INTEGER,
+  "county_name" VARCHAR,
+  CONSTRAINT dim_uszips_pk PRIMARY KEY ("zip")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_i94countrycode" (
+"code" VARCHAR,
+  "country" VARCHAR,
+  CONSTRAINT dim_i94countrycode_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_usdp" (
+"State" VARCHAR,
+  "City" VARCHAR,
+  "Median_Age" DECIMAL(10,6),
+  "State_Code" VARCHAR,
+  "Male Population" INTEGER,
+  "Female_Population" INTEGER,
+  "Total_Population" DECIMAL(10,6),
+  "Number_of_Veterans" INTEGER,
+  "Foreign_born" INTEGER,
+  CONSTRAINT dim_usdp_pk PRIMARY KEY ("State", "City")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_usdr" (
+"State" VARCHAR,
+  "City" VARCHAR,
+  "State_Code" VARCHAR,
+  "American_Indian_and_Alaska_Native" INTEGER,
+  "Asian" INTEGER,
+  "Black_or_African_American" INTEGER,
+  "Hispanic_or_Latino" INTEGER,
+  "White" INTEGER,
+  CONSTRAINT dim_usdr_pk PRIMARY KEY ("State", "City")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_temper" (
+"dt" TIMESTAMP,
+  "AverageTemperature" DECIMAL(10,6),
+  "City" VARCHAR,
+  "Country" VARCHAR,
+  CONSTRAINT dim_temper_pk PRIMARY KEY ("dt", "City", "Country")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_alc" (
+"code" VARCHAR,
+  "description" VARCHAR,
+  CONSTRAINT dim_alc_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_visapost" (
+"Post" VARCHAR,
+  "code" VARCHAR,
+  CONSTRAINT dim_visapost_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_alpha2countrycode" (
+"country" VARCHAR,
+  "alpha2" VARCHAR,
+  "alpha3" VARCHAR,
+  "Num" INTEGER,
+  "ITU" VARCHAR,
+  "GEC" VARCHAR,
+  "IOC" VARCHAR,
+  "FIFA" VARCHAR,
+  "DS" VARCHAR,
+  "WMO" VARCHAR,
+  "GAUL" VARCHAR,
+  "MARC" VARCHAR,
+  "dial" VARCHAR,
+  "independent" VARCHAR,
+  "VisaRequired" VARCHAR,
+  CONSTRAINT dim_alpha2countrycode_pk PRIMARY KEY ("country")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_iap" (
+"Location" VARCHAR,
+  "Airport" VARCHAR,
+  "IATA" VARCHAR,
+  CONSTRAINT dim_iap_pk PRIMARY KEY ("Airport", "IATA")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_wc" (
+"city" VARCHAR,
+  "city_ascii" VARCHAR,
+  "lat" DECIMAL(10,6),
+  "lng" DECIMAL(10,6),
+  "country" VARCHAR,
+  "iso2" VARCHAR,
+  "iso3" VARCHAR,
+  "admin_name" VARCHAR,
+  "capital" VARCHAR,
+  "population" DECIMAL(10,6),
+  "id" INTEGER,
+  CONSTRAINT dim_wc_pk PRIMARY KEY ("city", "country")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_USstatecode" (
+"code" VARCHAR,
+  "state" VARCHAR,
+  "status" VARCHAR,
+  CONSTRAINT dim_USstatecode_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "fact_ids" (
+"CoC" VARCHAR,
+  "CoR" VARCHAR,
+  "PoE" VARCHAR,
+  "landing_state" VARCHAR,
+  "age" VARCHAR,
+  "visa_issued_in" VARCHAR,
+  "occup" VARCHAR,
+  "biryear" VARCHAR,
+  "gender" VARCHAR,
+  "airline" VARCHAR,
+  "admnum" VARCHAR,
+  "fltno" VARCHAR,
+  "visatype" VARCHAR,
+  "arrival_mode" VARCHAR,
+  "visit_purpose" VARCHAR,
+  "arrival_dt" TIMESTAMP,
+  "departure_dt" TIMESTAMP,
+  "DaysinUS" DECIMAL(10,6),
+  "added_to_i94" TIMESTAMP,
+  "allowed_until" TIMESTAMP,
+  "entry_exit" VARCHAR,
+  CONSTRAINT fact_ids_pk PRIMARY KEY ("admnum")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_visatype" (
+"visatype" VARCHAR,
+  "description" VARCHAR,
+  CONSTRAINT dim_visatype_pk PRIMARY KEY ("visatype")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_ac" (
+"type" VARCHAR,
+  "name" VARCHAR,
+  "elevation_ft" DECIMAL(10,6),
+  "continent" DECIMAL(10,6),
+  "iso_country" VARCHAR,
+  "iso_region" VARCHAR,
+  "municipality" VARCHAR,
+  "iata_code" VARCHAR,
+  "local_code" VARCHAR,
+  "coordinates" VARCHAR,
+  "longitude" VARCHAR,
+  "latitude" VARCHAR,
+  "state" VARCHAR,
+  "facilities" VARCHAR,
+  CONSTRAINT dim_ac_pk PRIMARY KEY ("type", "name")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_USPoE" (
+"code" VARCHAR,
+  "citystate" VARCHAR,
+  "city" VARCHAR,
+  "state" VARCHAR,
+  CONSTRAINT dim_USPoE_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_uszips" (
+"zip" INTEGER,
+  "lat" DECIMAL(10,6),
+  "lng" DECIMAL(10,6),
+  "city" VARCHAR,
+  "state_id" VARCHAR,
+  "state_name" VARCHAR,
+  "population" INTEGER,
+  "density" DECIMAL(10,6),
+  "county_fips" INTEGER,
+  "county_name" VARCHAR,
+  CONSTRAINT dim_uszips_pk PRIMARY KEY ("zip")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_i94countrycode" (
+"code" VARCHAR,
+  "country" VARCHAR,
+  CONSTRAINT dim_i94countrycode_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_usdp" (
+"State" VARCHAR,
+  "City" VARCHAR,
+  "Median_Age" DECIMAL(10,6),
+  "State_Code" VARCHAR,
+  "Male Population" INTEGER,
+  "Female_Population" INTEGER,
+  "Total_Population" DECIMAL(10,6),
+  "Number_of_Veterans" INTEGER,
+  "Foreign_born" INTEGER,
+  CONSTRAINT dim_usdp_pk PRIMARY KEY ("State", "City")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_usdr" (
+"State" VARCHAR,
+  "City" VARCHAR,
+  "State_Code" VARCHAR,
+  "American_Indian_and_Alaska_Native" INTEGER,
+  "Asian" INTEGER,
+  "Black_or_African_American" INTEGER,
+  "Hispanic_or_Latino" INTEGER,
+  "White" INTEGER,
+  CONSTRAINT dim_usdr_pk PRIMARY KEY ("State", "City")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_temper" (
+"dt" TIMESTAMP,
+  "AverageTemperature" DECIMAL(10,6),
+  "City" VARCHAR,
+  "Country" VARCHAR,
+  CONSTRAINT dim_temper_pk PRIMARY KEY ("dt", "City", "Country")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_alc" (
+"code" VARCHAR,
+  "description" VARCHAR,
+  CONSTRAINT dim_alc_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_visapost" (
+"Post" VARCHAR,
+  "code" VARCHAR,
+  CONSTRAINT dim_visapost_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_alpha2countrycode" (
+"country" VARCHAR,
+  "alpha2" VARCHAR,
+  "alpha3" VARCHAR,
+  "Num" INTEGER,
+  "ITU" VARCHAR,
+  "GEC" VARCHAR,
+  "IOC" VARCHAR,
+  "FIFA" VARCHAR,
+  "DS" VARCHAR,
+  "WMO" VARCHAR,
+  "GAUL" VARCHAR,
+  "MARC" VARCHAR,
+  "dial" VARCHAR,
+  "independent" VARCHAR,
+  "VisaRequired" VARCHAR,
+  CONSTRAINT dim_alpha2countrycode_pk PRIMARY KEY ("country")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_iap" (
+"Location" VARCHAR,
+  "Airport" VARCHAR,
+  "IATA" VARCHAR,
+  CONSTRAINT dim_iap_pk PRIMARY KEY ("Airport", "IATA")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_wc" (
+"city" VARCHAR,
+  "city_ascii" VARCHAR,
+  "lat" DECIMAL(10,6),
+  "lng" DECIMAL(10,6),
+  "country" VARCHAR,
+  "iso2" VARCHAR,
+  "iso3" VARCHAR,
+  "admin_name" VARCHAR,
+  "capital" VARCHAR,
+  "population" DECIMAL(10,6),
+  "id" INTEGER,
+  CONSTRAINT dim_wc_pk PRIMARY KEY ("city", "country")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_USstatecode" (
+"code" VARCHAR,
+  "state" VARCHAR,
+  "status" VARCHAR,
+  CONSTRAINT dim_USstatecode_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "fact_ids" (
+"CoC" VARCHAR,
+  "CoR" VARCHAR,
+  "PoE" VARCHAR,
+  "landing_state" VARCHAR,
+  "age" VARCHAR,
+  "visa_issued_in" VARCHAR,
+  "occup" VARCHAR,
+  "biryear" VARCHAR,
+  "gender" VARCHAR,
+  "airline" VARCHAR,
+  "admnum" VARCHAR,
+  "fltno" VARCHAR,
+  "visatype" VARCHAR,
+  "arrival_mode" VARCHAR,
+  "visit_purpose" VARCHAR,
+  "arrival_dt" TIMESTAMP,
+  "departure_dt" TIMESTAMP,
+  "DaysinUS" DECIMAL(10,6),
+  "added_to_i94" TIMESTAMP,
+  "allowed_until" TIMESTAMP,
+  "entry_exit" VARCHAR,
+  CONSTRAINT fact_ids_pk PRIMARY KEY ("admnum")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_visatype" (
+"visatype" VARCHAR,
+  "description" VARCHAR,
+  CONSTRAINT dim_visatype_pk PRIMARY KEY ("visatype")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_ac" (
+"type" VARCHAR,
+  "name" VARCHAR,
+  "elevation_ft" DECIMAL(10,6),
+  "continent" DECIMAL(10,6),
+  "iso_country" VARCHAR,
+  "iso_region" VARCHAR,
+  "municipality" VARCHAR,
+  "iata_code" VARCHAR,
+  "local_code" VARCHAR,
+  "coordinates" VARCHAR,
+  "longitude" VARCHAR,
+  "latitude" VARCHAR,
+  "state" VARCHAR,
+  "facilities" VARCHAR,
+  CONSTRAINT dim_ac_pk PRIMARY KEY ("type", "name")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_USPoE" (
+"code" VARCHAR,
+  "citystate" VARCHAR,
+  "city" VARCHAR,
+  "state" VARCHAR,
+  CONSTRAINT dim_USPoE_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_uszips" (
+"zip" INTEGER,
+  "lat" DECIMAL(10,6),
+  "lng" DECIMAL(10,6),
+  "city" VARCHAR,
+  "state_id" VARCHAR,
+  "state_name" VARCHAR,
+  "population" INTEGER,
+  "density" DECIMAL(10,6),
+  "county_fips" INTEGER,
+  "county_name" VARCHAR,
+  CONSTRAINT dim_uszips_pk PRIMARY KEY ("zip")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_i94countrycode" (
+"code" VARCHAR,
+  "country" VARCHAR,
+  CONSTRAINT dim_i94countrycode_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_usdp" (
+"State" VARCHAR,
+  "City" VARCHAR,
+  "Median_Age" DECIMAL(10,6),
+  "State_Code" VARCHAR,
+  "Male Population" INTEGER,
+  "Female_Population" INTEGER,
+  "Total_Population" DECIMAL(10,6),
+  "Number_of_Veterans" INTEGER,
+  "Foreign_born" INTEGER,
+  CONSTRAINT dim_usdp_pk PRIMARY KEY ("State", "City")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_usdr" (
+"State" VARCHAR,
+  "City" VARCHAR,
+  "State_Code" VARCHAR,
+  "American_Indian_and_Alaska_Native" INTEGER,
+  "Asian" INTEGER,
+  "Black_or_African_American" INTEGER,
+  "Hispanic_or_Latino" INTEGER,
+  "White" INTEGER,
+  CONSTRAINT dim_usdr_pk PRIMARY KEY ("State", "City")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_temper" (
+"dt" TIMESTAMP,
+  "AverageTemperature" DECIMAL(10,6),
+  "City" VARCHAR,
+  "Country" VARCHAR,
+  CONSTRAINT dim_temper_pk PRIMARY KEY ("dt", "City", "Country")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_alc" (
+"code" VARCHAR,
+  "description" VARCHAR,
+  CONSTRAINT dim_alc_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_visapost" (
+"location" VARCHAR,
+  "code" VARCHAR,
+  CONSTRAINT dim_visapost_pk PRIMARY KEY ("code")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_alpha2countrycode" (
+"country" VARCHAR,
+  "alpha2" VARCHAR,
+  "alpha3" VARCHAR,
+  "Num" INTEGER,
+  "ITU" VARCHAR,
+  "GEC" VARCHAR,
+  "IOC" VARCHAR,
+  "FIFA" VARCHAR,
+  "DS" VARCHAR,
+  "WMO" VARCHAR,
+  "GAUL" VARCHAR,
+  "MARC" VARCHAR,
+  "dial" VARCHAR,
+  "independent" VARCHAR,
+  "VisaRequired" VARCHAR,
+  CONSTRAINT dim_alpha2countrycode_pk PRIMARY KEY ("country")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_iap" (
+"Location" VARCHAR,
+  "Airport" VARCHAR,
+  "IATA" VARCHAR,
+  CONSTRAINT dim_iap_pk PRIMARY KEY ("Airport", "IATA")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_wc" (
+"city" VARCHAR,
+  "city_ascii" VARCHAR,
+  "lat" DECIMAL(10,6),
+  "lng" DECIMAL(10,6),
+  "country" VARCHAR,
+  "iso2" VARCHAR,
+  "iso3" VARCHAR,
+  "admin_name" VARCHAR,
+  "capital" VARCHAR,
+  "population" DECIMAL(10,6),
+  "id" INTEGER,
+  CONSTRAINT dim_wc_pk PRIMARY KEY ("city", "country")
+);
+
+CREATE TABLE IF NOT EXISTS "dim_USstatecode" (
+"code" VARCHAR,
+  "state" VARCHAR,
+  "status" VARCHAR,
+  CONSTRAINT dim_USstatecode_pk PRIMARY KEY ("code")
+);
+

@@ -1,0 +1,154 @@
+dfs_visatype1
+ |-- visatype: string (nullable = true)
+ |-- description: string (nullable = true)
+
+dfs_ac1
+ |-- type: string (nullable = true)
+ |-- name: string (nullable = true)
+ |-- elevation_ft: string (nullable = true)
+ |-- continent: string (nullable = true)
+ |-- iso_country: string (nullable = true)
+ |-- iso_region: string (nullable = true)
+ |-- municipality: string (nullable = true)
+ |-- iata_code: string (nullable = true) - df_iap(IATA)
+ |-- local_code: string (nullable = true)
+ |-- coordinates: string (nullable = true)
+ |-- longitude: string (nullable = true)
+ |-- latitude: string (nullable = true)
+ |-- state: string (nullable = true) - dfs_uszips1(state_id)
+ |-- facilities: string (nullable = true)
+
+dfs_USPoE1
+ |-- code: string (nullable = true)
+ |-- citystate: string (nullable = true)
+ |-- city: string (nullable = true)
+ |-- state: string (nullable = true) - dfs_USstatecode(code)
+
+dfs_uszips1
+ |-- zip: string (nullable = true)
+ |-- lat: string (nullable = true)
+ |-- lng: string (nullable = true)
+ |-- city: string (nullable = true)
+ |-- state_id: string (nullable = true) - dfs_USstatecode(code)
+ |-- state_name: string (nullable = true)
+ |-- population: string (nullable = true)
+ |-- density: string (nullable = true)
+ |-- county_fips: string (nullable = true)
+ |-- county_name: string (nullable = true)
+
+dfs_i94countrycode1
+ |-- code: string (nullable = true)
+ |-- country: string (nullable = true) - dfs_alpha2countrycode(country)
+
+dfs_uscd1
+ |-- City: string (nullable = true)
+ |-- State: string (nullable = true)
+ |-- Median Age: string (nullable = true)
+ |-- Male Population: string (nullable = true)
+ |-- Female Population: string (nullable = true)
+ |-- Total Population: string (nullable = true)
+ |-- Number of Veterans: string (nullable = true)
+ |-- Foreign-born: string (nullable = true)
+ |-- Average Household Size: string (nullable = true)
+ |-- State Code: string (nullable = true)
+ |-- Race: string (nullable = true)
+ |-- Count: string (nullable = true)
+
+dfs_usdp
+ |-- State: string (nullable = true)
+ |-- City: string (nullable = true)
+ |-- Median_Age: string (nullable = true)
+ |-- State_Code: string (nullable = true) - dfs_uszips1(state_id)
+ |-- Male Population: string (nullable = true)
+ |-- Female_Population: string (nullable = true)
+ |-- Total_Population: string (nullable = true)
+ |-- Number_of_Veterans: string (nullable = true)
+ |-- Foreign_born: string (nullable = true)
+
+dfs_usdr
+ |-- State: string (nullable = true)
+ |-- City: string (nullable = true)
+ |-- State_Code: string (nullable = true) - dfs_uszips1(state_id)
+ |-- American_Indian_and_Alaska_Native: string (nullable = true)
+ |-- Asian: string (nullable = true)
+ |-- Black_or_African_American: string (nullable = true)
+ |-- Hispanic_or_Latino: string (nullable = true)
+ |-- White: string (nullable = true)
+
+dfs_temper1
+ |-- dt: string (nullable = true)
+ |-- AverageTemperature: string (nullable = true)
+ |-- City: string (nullable = true) - dfs_uszips1(city)
+ |-- Country: string (nullable = true)
+
+dfs_wc1
+ |-- city: string (nullable = true)
+ |-- city_ascii: string (nullable = true)
+ |-- lat: string (nullable = true)
+ |-- lng: string (nullable = true)
+ |-- country: string (nullable = true)
+ |-- iso2: string (nullable = true)
+ |-- iso3: string (nullable = true)
+ |-- admin_name: string (nullable = true)
+ |-- capital: string (nullable = true)
+ |-- population: string (nullable = true)
+ |-- id: string (nullable = true)
+
+dfs_alc
+ |-- code: string (nullable = true)
+ |-- description: string (nullable = true)
+
+dfs_visapost
+ |-- Post: string (nullable = true)
+ |-- code: string (nullable = true)
+
+dfs_alpha2countrycode
+ |-- country: string (nullable = true)
+ |-- alpha2: string (nullable = true)
+ |-- alpha3: string (nullable = true)
+ |-- Num: string (nullable = true)
+ |-- ITU: string (nullable = true)
+ |-- GEC: string (nullable = true)
+ |-- IOC: string (nullable = true)
+ |-- FIFA: string (nullable = true)
+ |-- DS: string (nullable = true)
+ |-- WMO: string (nullable = true)
+ |-- GAUL: string (nullable = true)
+ |-- MARC: string (nullable = true)
+ |-- dial: string (nullable = true)
+ |-- independent: string (nullable = true)
+ |-- VisaRequired: string (nullable = true)
+
+dfs_iap
+ |-- Location: string (nullable = true)
+ |-- Airport: string (nullable = true)
+ |-- IATA: string (nullable = true)
+
+dfs_USstatecode
+ |-- code: string (nullable = true)
+ |-- state: string (nullable = true)
+ |-- status: string (nullable = true)
+
+dfs_ids1
+ |-- CoC: string (nullable = true) - dfs_i94countrycode1(code)
+ |-- CoR: string (nullable = true) - dfs_i94countrycode1(code)
+ |-- PoE: string (nullable = true) - dfs_USPoE1(code)
+ |-- landing_state: string (nullable = true) - dfs_uszips1(state_id)
+ |-- age: string (nullable = true)
+ |-- visa_issued_in: string (nullable = true) - dfs_visapost(code)
+ |-- occup: string (nullable = true)
+ |-- biryear: string (nullable = true)
+ |-- gender: string (nullable = true)
+ |-- airline: string (nullable = true) - dfs_alc(code)
+ |-- admnum: string (nullable = true)
+ |-- fltno: string (nullable = true)
+ |-- visatype: string (nullable = true) - dfs_visatype1(visatype)
+ |-- arrival_mode: string (nullable = true)
+ |-- visit_purpose: string (nullable = true)
+ |-- arrival_dt: string (nullable = true)
+ |-- departure_dt: string (nullable = true)
+ |-- DaysinUS: string (nullable = true)
+ |-- added_to_i94: string (nullable = true)
+ |-- allowed_until: string (nullable = true)
+ |-- entry_exit: string (nullable = true)
+ |-- month: string (nullable = true)
