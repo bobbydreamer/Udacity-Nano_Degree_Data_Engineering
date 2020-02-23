@@ -213,13 +213,13 @@ root@1150c8c516d1:/home/workspace# du -h ../../data/18-83510-I94-Data-2016/*
     ```
 
 >Execute the below commands in Python 3 console
-1. ```%run process-df.py```
-1. ```%run S3Upload.py```
-1. ```%run create_cluster.py```
-1. ```%run create_tables.py```
-1. ```%run etl.py```
-1. Execute all the cells in ```Capstone Project - D - Analytics.ipynb```
-1. ```%run delete_cluster.py```
+1. ```%run ```[process-df.py](./process-df.py)
+1. ```%run ```[S3Upload.py](./S3Upload.py)
+1. ```%run ```[create_cluster.py](./create_cluster.py)
+1. ```%run ```[create_tables.py](./create_tables.py)
+1. ```%run ```[etl.py](./etl.py)
+1. Execute all the cells in [Capstone Project - D - Analytics.ipynb](./Capstone-Project---D---Analytics.ipynb)
+1. ```%run ```[delete_cluster.py](./delete_cluster.py)
 
 
 ### Outputs
@@ -601,7 +601,7 @@ Done!
 <li> <h4><a href="#step2-ac">Airport codes - df_ac</a></h4> </li>
 <li> <h4><a href="#step2-uscd">US Cities demographic - df_uscd</a></h4> </li>
 <li> <h4><a href="#step2-temper">Temperature - df_temper</a></h4> </li>
-<li style="list-style-type:disc;"> <h4><a id="step2-aa">After Exploring, Assessment &amp; Cleaning</a></h4> </li>
+<li style="list-style-type:disc;"> <h4><a href="#step2-aa">After Exploring, Assessment &amp; Cleaning</a></h4> </li>
 </ul>
 <li> <h4><a href="#step3">Step 3: Define the Data Model</a></h4> </li>
 <li> <h4><a href="#step4">Step 4: Run ETL to Model the Data</a></h4> </li>
@@ -876,8 +876,8 @@ Other smaller & additional datasets are,
 </ul>
 </div>
 
-
 <a id="step2-aa"></a>
+
 <div>
 After exploring, assessing &amp; cleaning data, lots of questions arised and below are a few, i would like to get answers and produce a report, 
 <ol>
@@ -973,7 +973,7 @@ Below are the Jupyter Notebooks used for the exercise : <br>
 </div>
 
 <div> By reviewing the dataframes, we can write DDL statements for the Fact &amp; Dimensional tables. I have found an easy process (<code>pd.io.sql.get_schema</code>) to generate DDL statements from a dataframe.</div>
-
+<br>
 <img src="./images/FactandDimension_Tables.png" alt="drawing" width="1200"/>
 
 <a id="step4-dqc"></a>
